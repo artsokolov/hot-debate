@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $title
@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Question whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Question whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Question whereUserId($value)
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\User $user
  * @mixin \Eloquent
  */
 class Question extends Model
