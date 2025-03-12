@@ -13,15 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $user = User::whereEmail('test@example.com')->first();
+        if (!$user) {
+            User::factory()->create([
+                'name' => 'Admin',
+                'email' => 'test@example.com',
+            ]);
+        }
+
         $this->call([
-            CategorySeeder::class
+            CategorySeeder::class,
+            QuestionSeeder::class,
         ]);
-
-        // User::factory(10)->create();
-
-//        User::factory()->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//        ]);
     }
 }

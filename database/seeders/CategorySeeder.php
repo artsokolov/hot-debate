@@ -17,10 +17,13 @@ class CategorySeeder extends Seeder
         $categories = config('categories');
 
         foreach ($categories as $category) {
-            Category::create([
-                'name' => $category['name'],
-                'description' => $category['description']
-            ]);
+            Category::firstOrCreate(
+                ['slug' => Str::slug($category['name'])],
+                [
+                    'name' => $category['name'],
+                    'description' => $category['description']
+                ]
+            );
         }
     }
 }
