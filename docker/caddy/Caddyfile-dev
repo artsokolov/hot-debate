@@ -1,0 +1,21 @@
+{
+    email sokolovartem6@gmail.com
+}
+
+localhost {
+    handle {
+        root * /var/www/public
+        php_fastcgi app:9000 {
+            try_files {path} {path}/index.php /index.php
+        }
+    }
+
+    encode gzip
+    log {
+        output file /data/access.log {
+            roll_size 10mb
+            roll_keep 5
+            roll_keep_for 720h
+        }
+    }
+}

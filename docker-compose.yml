@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./
+    entrypoint: ["./entrypoint.sh"]
+    container_name: debate_app
+    restart: unless-stopped
+    tty: true
+    env_file:
+      - .env
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+    expose:
+      - "9000"
+
+  db:
+    image: postgres:latest
+    container_name: debate_db
+    restart: always
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+  caddy:
+    image: caddy:latest
+    container_name: debate_caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./docker/caddy/Caddyfile-dev:/etc/caddy/Caddyfile
+      - ./:/var/www
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  postgres_data:
+    driver: local
+  caddy_data:
+  caddy_config:
