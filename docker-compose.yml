@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     build: ./
-    entrypoint: ["./entrypoint.sh"]
+    entrypoint: ["./entrypoint-dev.sh"]
     container_name: debate_app
     restart: unless-stopped
     tty: true
