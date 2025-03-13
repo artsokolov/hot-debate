@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $title
@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Vote> $votes
  * @property-read int|null $votes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ModerationLog> $moderationLogs
+ * @property-read int|null $moderation_logs_count
  * @mixin \Eloquent
  */
 class Question extends Model
