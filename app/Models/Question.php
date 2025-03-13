@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title
@@ -71,5 +71,10 @@ class Question extends Model
     public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
+    }
+
+    public function moderationLogs(): HasMany
+    {
+        return $this->hasMany(ModerationLog::class);
     }
 }

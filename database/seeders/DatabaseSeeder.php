@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             VoteSeeder::class,
             CommentSeeder::class,
-            ModerationReasonSeeder::class
+            ModerationReasonSeeder::class,
+            ModerationLogSeeder::class
         ]);
     }
 }
