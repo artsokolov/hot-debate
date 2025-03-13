@@ -25,7 +25,7 @@ class VoteService
             throw new QuestionNotFoundException("Question with id {$questionId} not found during voting");
         }
 
-        if (!$question->openForVoting()) {
+        if (!$question->isPublic()) {
             throw new VotingException("You can't vote for this question");
         }
 

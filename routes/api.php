@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\VoteController;
 use Illuminate\Http\Request;
@@ -15,6 +16,8 @@ Route::prefix('auth')->group(function () {
 Route::prefix('questions')->middleware('auth:sanctum')->group(function () {
     Route::post('/{questionId}/like', [VoteController::class, 'like']);
     Route::post('/{questionId}/dislike', [VoteController::class, 'dislike']);
+
+    Route::post('/{questionId}/comments', [CommentController::class, 'create']);
 
     Route::post('/', [QuestionController::class, 'create']);
 });
