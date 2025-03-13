@@ -23,7 +23,7 @@ class QuestionService
             throw new CategoryNotFoundException("Category with slug '$categorySlug' not found");
         }
 
-        return $category->questions()->paginate();
+        return $category->questions()->published()->paginate();
     }
 
     /**
