@@ -51,6 +51,7 @@ class Question extends Model
         'title',
         'status',
         'category_id',
+        'is_anonymous',
         'user_id'
     ];
 

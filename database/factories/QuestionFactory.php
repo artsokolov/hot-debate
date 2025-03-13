@@ -19,7 +19,8 @@ class QuestionFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence() . '?',
-            'status' => $this->faker->randomElement(QuestionStatus::values())
+            'status' => $this->faker->randomElement(QuestionStatus::values()),
+            'is_anonymous' => $this->faker->boolean()
         ];
     }
 }

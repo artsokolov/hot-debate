@@ -52,6 +52,7 @@ class QuestionService
             ->create([
                 'title' => $question->getQuestion(),
                 'user_id' => $question->getUserId(),
+                'is_anonymous' => $question->isStayAnonymous()
             ]);
     }
 }
