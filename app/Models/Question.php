@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\ValueObject\QuestionStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $votes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ModerationLog> $moderationLogs
  * @property-read int|null $moderation_logs_count
+ * @method static Builder<static>|Question published()
  * @mixin \Eloquent
  */
 class Question extends Model
@@ -78,5 +80,14 @@ class Question extends Model
     public function moderationLogs(): HasMany
     {
         return $this->hasMany(ModerationLog::class);
+    }
+
+    /**
+     * SCOPES
+     */
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('status', QuestionStatus::PUBLISHED);
     }
 }

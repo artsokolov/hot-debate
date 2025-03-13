@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -36,6 +36,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Question> $questions
  * @property-read int|null $questions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable
