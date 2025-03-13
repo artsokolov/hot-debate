@@ -8,7 +8,6 @@ use App\Exceptions\UserNotAllowedException;
 use App\Http\DTO\CreateQuestion;
 use App\Models\Category;
 use App\Models\Question;
-use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 

@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\BadQuestionException;
 use App\Exceptions\CategoryNotFoundException;
+use App\Exceptions\UserNotAllowedException;
 use App\Http\DTO\CreateQuestion;
 use App\Http\Requests\CreateQuestionRequest;
 use App\Http\Service\QuestionService;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends Controller
 {
     public function __construct(
-        private QuestionService $questionService
+        private readonly QuestionService $questionService
     ) {}
 
     /**
@@ -29,6 +29,7 @@ class QuestionController extends Controller
     /**
      * @throws CategoryNotFoundException
      * @throws BadQuestionException
+     * @throws UserNotAllowedException
      */
     public function create(CreateQuestionRequest $request): JsonResponse
     {
