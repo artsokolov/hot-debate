@@ -6,12 +6,12 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class CategoryNotFoundException extends Exception
+class UserNotAllowedException extends Exception
 {
     public function render(): JsonResponse
     {
         return response()->json([
             'message' => $this->getMessage()
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        ], Response::HTTP_FORBIDDEN);
     }
 }

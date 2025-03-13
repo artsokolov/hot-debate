@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title
@@ -37,12 +37,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ModerationLog> $moderationLogs
  * @property-read int|null $moderation_logs_count
  * @method static Builder<static>|Question published()
+ * @method static Builder<static>|Question withinDay()
  * @mixin \Eloquent
  */
 class Question extends Model
 {
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
+
+    private const RESTRICTION_PER_DAY = 10;
 
     protected $fillable = [
         'title',
@@ -51,11 +54,24 @@ class Question extends Model
         'user_id'
     ];
 
+    protected $attributes = [
+        'status' => QuestionStatus::ON_MODERATION
+    ];
+
     protected function casts(): array
     {
         return [
             'status' => QuestionStatus::class,
         ];
+    }
+
+    /**
+     * METHODS
+     */
+
+    public static function exceedingLimit(int $userId): bool
+    {
+        return self::whereUserId($userId)->withinDay()->count() >= self::RESTRICTION_PER_DAY;
     }
 
     /**
@@ -89,5 +105,10 @@ class Question extends Model
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('status', QuestionStatus::PUBLISHED);
+    }
+
+    public function scopeWithinDay(Builder $query): Builder
+    {
+        return $query->where('created_at', '>', now()->subDay());
     }
 }

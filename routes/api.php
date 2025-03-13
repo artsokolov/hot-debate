@@ -10,7 +10,12 @@ Route::prefix('auth')->group(function () {
     Route::post('sign-in', [AuthController::class, 'signIn']);
 });
 
-Route::get('questions/{categorySlug:string}', [QuestionController::class, 'list']);
+Route::prefix('questions')->group(function () {
+    Route::get('{categorySlug}', [QuestionController::class, 'list']);
+
+    Route::post('/', [QuestionController::class, 'create'])
+        ->middleware('auth:sanctum');
+});
 
 Route::get('/user', function (Request $request) {
     return $request->user();

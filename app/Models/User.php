@@ -82,6 +82,7 @@ class User extends Authenticatable
     /**
      * RELATIONS
      */
+
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
