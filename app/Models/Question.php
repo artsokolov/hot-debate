@@ -75,6 +75,11 @@ class Question extends Model
         return self::whereUserId($userId)->withinDay()->count() >= self::RESTRICTION_PER_DAY;
     }
 
+    public function openForVoting(): bool
+    {
+        return $this->status == QuestionStatus::PUBLISHED;
+    }
+
     /**
      * Relations
      */
