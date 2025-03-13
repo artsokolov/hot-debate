@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,8 @@ Route::prefix('questions')->group(function () {
     Route::post('/', [QuestionController::class, 'create'])
         ->middleware('auth:sanctum');
 });
+
+Route::get('categories', [CategoryController::class, 'list']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
