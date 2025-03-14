@@ -2,12 +2,21 @@
     email sokolovartem6@gmail.com
 }
 
+# Main site with API handling
 localhost {
-    handle {
+    @laravelAPI {
+        path /api/*
+    }
+
+    handle @laravelAPI {
         root * /var/www/public
         php_fastcgi app:9000 {
             try_files {path} {path}/index.php /index.php
         }
+    }
+
+    handle {
+        reverse_proxy nuxt:3000
     }
 
     encode gzip
